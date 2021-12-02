@@ -3,19 +3,17 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import { Button, Link } from '@mui/material';
 import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
 import React from 'react';
 
@@ -163,9 +161,12 @@ export default function Nav({ connected }: { connected: Boolean; }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }} >
-                    <Button variant="outlined" href="/ah" color="inherit">
-                        Accueil
-                    </Button>
+                    <Link href="/about" passHref>
+
+                        <Button variant="outlined" href="/ah" color="primary">
+                            Accueil
+                        </Button>
+                    </Link>
                     {/* <Typography
                         variant="h6"
                         noWrap
