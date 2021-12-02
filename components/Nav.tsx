@@ -17,7 +17,8 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
-import { display } from '@mui/system';
+import React from 'react';
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -162,14 +163,18 @@ export default function Nav({ connected }: { connected: Boolean; }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }} >
-                    <Typography
+                    <Button variant="outlined" href="/ah" color="inherit">
+                        Accueil
+                    </Button>
+                    {/* <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ display: { xs: 'none', sm: 'block' } }}
-                    >
-                        Accueil
+                    > 
+                     
                     </Typography>
+                        */}
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -179,8 +184,8 @@ export default function Nav({ connected }: { connected: Boolean; }) {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } , flexFlow:"row", justifyContent:"right" }}>
-                        <Button sx={{mr:"1em"}} 
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "right" }}>
+                        <Button sx={{ mr: "1em" }}
                             variant="text"
                             color="inherit"
                             endIcon={<ArrowDropDownSharpIcon />}
