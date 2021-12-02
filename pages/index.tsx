@@ -2,64 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Nav from '../components/Nav';
 import styles from '../styles/Home.module.css';
-import { styled } from '@mui/material/styles';
-import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import React from 'react';
-import { createTheme } from '@mui/material/styles';
-import { LinkProps } from '@mui/material/Link';
-import { ThemeProvider } from '@emotion/react';
 import Footer from '../components/Footer';
 
-
-
-const Anchor = styled('a')({});
-
-interface NextLinkComposedProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>,
-    Omit<NextLinkProps, 'href' | 'as'> {
-  to: NextLinkProps['href'];
-  linkAs?: NextLinkProps['as'];
-  href?: NextLinkProps['href'];
-}
-
-
-const LinkBehavior = React.forwardRef<HTMLAnchorElement, NextLinkComposedProps>((props, ref) => {
-  const { to, linkAs, href, replace, scroll, shallow, prefetch, locale, ...other } = props;
-
-  return (<NextLink
-    href={to}
-    prefetch={prefetch}
-    as={linkAs}
-    replace={replace}
-    scroll={scroll}
-    shallow={shallow}
-    passHref
-    locale={locale}
-  >
-    <Anchor ref={ref} {...other} />
-  </NextLink>);
-});
-
-const theme = createTheme({
-  components: {
-    MuiLink: {
-      defaultProps: {
-        component: LinkBehavior,
-      } as LinkProps,
-    },
-    MuiButtonBase: {
-      defaultProps: {
-        LinkComponent: LinkBehavior,
-      },
-    },
-  },
-});
 
 
 const Home: NextPage = () => {
 
   return (
-    <ThemeProvider theme={theme}>
 
       <div className={styles.container}>
         <Nav connected={true} />
@@ -113,7 +63,6 @@ const Home: NextPage = () => {
 
         <Footer />
       </div>
-    </ThemeProvider>
 
   );
 };

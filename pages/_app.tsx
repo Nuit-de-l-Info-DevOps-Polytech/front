@@ -1,8 +1,34 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ThemeOptions } from '@mui/material';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4f5ebf',
+      dark: '#303964',
+    },
+    secondary: {
+      main: '#d4be8c',
+    },
+    warning: {
+      main: '#ffa921',
+    },
+    error: {
+      main: '#fd3d31',
+    },
+  },
+  
+}); 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider theme={theme}>
+
+      <Component {...pageProps} />
+    </ThemeProvider>
+
+  );
 }
 
-export default MyApp
+export default MyApp;
