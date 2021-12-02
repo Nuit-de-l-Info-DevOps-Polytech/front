@@ -13,7 +13,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
-import { Button, Link } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import Link from 'next/link';
 import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
 import React from 'react';
 
@@ -161,21 +162,18 @@ export default function Nav({ connected }: { connected: Boolean; }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }} >
-                    <Link href="/about" passHref>
 
-                        <Button variant="outlined" href="/ah" color="primary">
+                    <Link href="/ah" passHref>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="a"
+                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                        >
                             Accueil
-                        </Button>
+
+                        </Typography>
                     </Link>
-                    {/* <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
-                    > 
-                     
-                    </Typography>
-                        */}
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
