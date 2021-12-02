@@ -163,7 +163,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
             <AppBar position="static">
                 <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }} >
 
-                    <Link href="/ah" passHref>
+                    <Link href="/" passHref>
                         <Typography
                             variant="h6"
                             noWrap
