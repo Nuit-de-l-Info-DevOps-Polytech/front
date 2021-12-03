@@ -12,7 +12,7 @@ export const theme = createTheme({
       dark: '#303964',
     },
     secondary: {
-      main: '#d4be8c',
+      main: '#1e1b18',
     },
     warning: {
       main: '#ffa921',
