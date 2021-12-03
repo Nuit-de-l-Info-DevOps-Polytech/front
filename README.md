@@ -1,6 +1,7 @@
 
 # <img src="https://user-images.githubusercontent.com/43273304/144527090-1002665e-f6b5-40dc-9ddc-1e99f6eff69d.jpeg" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="150" /> Front : Nuit de l'Info - DevOps Polytech
 ![Vercel](http://therealsujitk-vercel-badge.vercel.app/?app=front-iverly.vercel.app)
+
 Projet destiné à la gestion du front du concours de la nuit de l'info
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
