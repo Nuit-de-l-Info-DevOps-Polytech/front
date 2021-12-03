@@ -83,7 +83,7 @@ export default function FullWidthTextField() {
                 <Button startIcon={<FcGoogle size={25} />}>S'identifier avec Google</Button>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.2em"}}>
-                <Button startIcon={<FaGithub size={25} />}>S'identifier avec GitHub</Button>
+                <Button startIcon={<FaGithub size={25} onClick={() => window.open('https://auth.ndl.iverly.net/auth/github', '_blank')} />}>S'identifier avec GitHub</Button>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.5em"}}>
                 {secondaryText("Première visite ? ")}
