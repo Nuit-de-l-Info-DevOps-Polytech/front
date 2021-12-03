@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import type { NextPage } from 'next';
 import { Ref, useEffect, useState } from 'react';
 import useSWRInfinite from "swr/infinite";
+import GenericEditor from '../components/GenericEditor';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 const PAGE_SIZE = 6;
@@ -58,6 +59,7 @@ const Home: NextPage = () => {
   return (
     <div style={{ fontFamily: "sans-serif" }}>
 
+      <GenericEditor />
 
       <p style={{ position: "sticky" }}>
         showing {size} page(s) of {isLoadingMore ? "..." : issues.length}{" "}
