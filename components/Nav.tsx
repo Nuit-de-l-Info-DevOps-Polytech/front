@@ -17,6 +17,7 @@ import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import ArrowDropDownSharpIcon from '@mui/icons-material/ArrowDropDownSharp';
 import React from 'react';
+import useUser from '../hooks/useUser';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -83,6 +84,8 @@ export default function Nav({ connected }: { connected: Boolean; }) {
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    const user = useUser();
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -184,33 +187,40 @@ export default function Nav({ connected }: { connected: Boolean; }) {
                         />
                     </Search>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "right" }}>
-                        <Button sx={{ mr: "1em" }}
-                            variant="text"
-                            color="inherit"
-                            endIcon={<ArrowDropDownSharpIcon />}
-                        >
-                            Créer
-                        </Button>
-
-
-                        <Link href="/login" passHref>
-                            <Button
-                                color="inherit">
-                                    
-                                Connexion
+                        {user?.isAuthenticated &&
+                            <Button sx={{ mr: "1em" }}
+                                variant="text"
+                                color="inherit"
+                                endIcon={<ArrowDropDownSharpIcon />}
+                            >
+                                Créer
                             </Button>
-                        </Link>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+                        }
+
+
+                        {!user?.isAuthenticated &&
+                            <Link href="/login" passHref>
+                                <Button
+                                    color="inherit">
+                                        
+                                    Connexion
+                                </Button>
+                            </Link>
+                        }
+
+                        {user?.isAuthenticated &&
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        }
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
