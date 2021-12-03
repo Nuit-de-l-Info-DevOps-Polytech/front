@@ -25,12 +25,13 @@ const Form = styled('div')(() => ({
     justifyContent: "center",
 }));
 
-const FormElem = (label: string, getter?: any, setter?: any) => {
+const FormElem = (label: string, getter?: any, setter?: any, type?: any) => {
     return (
         <TextField
             id="outlined-name"
             label={label}
             value={getter}
+            type={type}
             onChange={e => setter && setter(e.target.value)}
             sx={{
                 width: "50%",
@@ -64,7 +65,7 @@ export default function FullWidthTextField() {
             </Typography>
             <Form>
                 {FormElem("Identifiant", email, setEmail)}
-                {FormElem("Mot de passe", password, setPassword)}
+                {FormElem("Mot de passe", password, setPassword, 'password')}
                 <Button variant="contained" disabled={!canSubmit()} sx={{ width: "50%", marginTop: "3em", marginBottom: "1em" }}>S'indentifier</Button>
         </Form>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0.5em"}}>
