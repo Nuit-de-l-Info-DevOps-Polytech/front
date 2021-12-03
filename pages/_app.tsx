@@ -4,6 +4,7 @@ import { ThemeOptions } from '@mui/material';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { UserProvider } from '../contexts/user';
 
 export const theme = createTheme({
   palette: {
@@ -25,15 +26,16 @@ export const theme = createTheme({
 });
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
 
-      <Nav connected />
+        <Nav connected />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
 
-      <Footer />
-    </ThemeProvider>
-
+        <Footer />
+      </ThemeProvider>
+    </UserProvider>
   );
 }
 
