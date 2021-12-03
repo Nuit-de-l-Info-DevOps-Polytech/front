@@ -1,5 +1,6 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import styled from '@mui/styled-engine';
 import { Button } from '@mui/material';
@@ -27,13 +28,15 @@ const Form = styled('div')(() => ({
 const FormElem = (label: string, getter?: any, setter?: any) => {
     return (
         <TextField
-            id="filled-search"
+            id="outlined-name"
             label={label}
             value={getter}
-            type="search"
-            variant="filled"
             onChange={e => setter && setter(e.target.value)}
-            sx= {{ margin: "0.5em" }}
+            sx= {{
+                width: "50%",
+                maxWidth: "100%",
+                marginTop: "1em"
+            }}
         />
     )
 };
@@ -84,6 +87,10 @@ export default function FullWidthTextField() {
                 {FormElem("Mot de passe", password, setPassword)}
                 <Button variant="contained" disabled={!canSubmit()} onClick={onSubmit} sx={{ width: "50%", marginTop: "3em", marginBottom: "2.5em" }}>S'inscrire</Button>
         </Form>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.5em"}}>
+                {secondaryText("Déjà un compte ? ")}
+                <Button color="secondary" variant="text" onClick={() => router.push('/login')}>Connectez-vous</Button>
+        </Box>
         </MainContainer>
     );
 }
