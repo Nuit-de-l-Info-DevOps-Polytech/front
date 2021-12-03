@@ -58,7 +58,6 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ fontFamily: "sans-serif" }}>
-      <PopupEdit />
 
 
       <p style={{ position: "sticky" }}>
