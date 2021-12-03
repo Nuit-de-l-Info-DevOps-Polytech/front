@@ -1,3 +1,4 @@
+import Login from '../components/Login';
 import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import type { NextPage } from 'next';
@@ -56,7 +57,6 @@ const Home: NextPage = () => {
 
   return (
     <div style={{ fontFamily: "sans-serif" }}>
-
 
 
       <p style={{ position: "sticky" }}>
