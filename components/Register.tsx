@@ -1,11 +1,8 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import styled from '@mui/styled-engine';
 import { Button } from '@mui/material';
-import { FcGoogle } from 'react-icons/fc'
-import { FaGithub } from 'react-icons/fa'
 
 const MainContainer = styled('div')(() => ({
     display: "grid",
