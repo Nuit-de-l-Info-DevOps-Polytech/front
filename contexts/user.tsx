@@ -20,7 +20,7 @@ export interface UserContextProps {
   data: UserData;
   localAuthentication: (email: string, password: string) => boolean;
   logout: () => boolean;
-  setIsAuthenticated: (boolean) => void;
+  setIsAuthenticated: (state: boolean) => void;
 }
 
 export const UserContext = createContext<UserContextProps | null>(null);
