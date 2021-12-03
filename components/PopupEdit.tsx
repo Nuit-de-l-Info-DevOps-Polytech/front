@@ -22,10 +22,12 @@ export function PopupEdit() {
                     m: 1,
                     width: '25ch',
                 },
+                margin: "0.5em"
             }}
             noValidate
             autoComplete="off"
         >
+            <h1>Nouveau ...</h1>
 
             <div>
 
@@ -106,7 +108,11 @@ export function PopupEdit() {
 
 
             </div>
+            <Box sx={{ display: "flex", justifyContent: "right" }}>
 
+                <Button color="error" variant="contained" sx={{ m: 1 }}>Annuler</Button>
+                <Button color="success" variant="contained" sx={{ m: 1 }}>Valider</Button>
+            </Box>
 
         </Box>
     );
