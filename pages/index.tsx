@@ -32,11 +32,16 @@ const MainContainer = styled('div')(() => ({
   marginLeft: "auto",
 }));
 
-const Filter = (name: string, selected: boolean) => {
-  return (
-    <Button variant="outlined" sx={{ margin: "1em" }}>{name}</Button>
-  );
-};
+
+
+enum mode {
+  Sauvetage = "Sauvetage"
+  , Bateau = "Bateau"
+  , Sauveteur = "Sauveteur"
+  , Naufragé = "Naufragé"
+
+}
+
 
 const Home: NextPage = () => {
   const { data, error } = useSWR('https://api.ndl.iverly.net/sauvetage', fetcher) as {
@@ -49,6 +54,14 @@ const Home: NextPage = () => {
       titre: string;
     }>, error: Error;
   };
+
+  const Filter = (name: mode, selected: boolean) => {
+    return (
+      <Button onClick={() => { setFilter(name); }} sx={{ margin: "1em" }} variant={selected ? "contained" : "outlined"} >{name}</Button>
+    );
+  };
+
+  const [filter, setFilter] = useState(mode.Sauvetage);
 
   if (error) {
     return <div>Erreur</div>;
@@ -63,10 +76,10 @@ const Home: NextPage = () => {
       <MainContainer>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Box sx={{ display: "flex", marginRight: "8em" }}>
-            {Filter("Sauvetage",false)}
-            {Filter("Bateau",false)}
-            {Filter("Sauveteur",false)}
-            {Filter("Naufragé",false)}
+            {Filter(mode.Sauvetage, (filter == mode.Sauvetage))}
+            {Filter(mode.Bateau, (filter == mode.Bateau))}
+            {Filter(mode.Sauveteur, (filter == mode.Sauveteur))}
+            {Filter(mode.Naufragé, (filter == mode.Naufragé))}
           </Box>
           <Box sx={{ display: "flex" }}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -106,18 +119,18 @@ const Home: NextPage = () => {
           alignSelf: "center",
           justifySelf: "center"
         }}>
-          {Result("", "oui oui", "ok bg de la night", "Bateau")}
-          {Result("", "oui oui", "ok bg de la night", "Bateau")}
-          {Result("", "oui oui", "ok bg de la night", "Bateau")}
-          {Result("", "oui oui", "ok bg de la night", "Bateau")}
-          {Result("", "oui oui", "ok bg de la night", "Bateau")}
+          {
+            data.map((value, index) => {
+              return (
+
+                <Box sx={{ marginTop: "3em" }} key={index}>
+                  <SearchResult image={""} name={value.titre} shortDescription={value.descriptionSauvetage} type={filter} />
+                </Box>
+              );
+            })
+          }
         </Box>
       </MainContainer>
-      {
-        data.map((value) => {
-          return (<RescueSummary image="" name={value.titre} shortDescription={value.descriptionSauvetage} />);
-        })
-      }
     </div>
   );
 };

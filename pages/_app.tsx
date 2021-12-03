@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import { UserProvider } from '../contexts/user';
+import { Box } from '@mui/system';
 
 export const theme = createTheme({
   palette: {
@@ -31,7 +32,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <Nav connected />
 
+      <Box sx={{minHeight:"70vh"}}>
+
         <Component {...pageProps} />
+      </Box>
 
         <Footer />
       </ThemeProvider>

@@ -104,7 +104,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={() => user.logout() && handleMenuClose()}>Déconnexion</MenuItem>
+            <MenuItem onClick={() => user?.logout() && handleMenuClose()}>Déconnexion</MenuItem>
         </Menu>
     );
 

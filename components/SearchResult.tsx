@@ -7,24 +7,30 @@ import { Box, CardActionArea, Chip } from '@mui/material';
 
 export default function RescueSummary({ image, name, shortDescription, type }: { image: string; name: string; shortDescription: string; type: string; }) {
   return (
-    <Box sx={{ boxShadow:"1", padding: "12px" }}>
+    <Box sx={{ boxShadow: "1", padding: "12px" }}>
       <Box sx={{ display: "flex" }}>
-        <img
-          src={image}
-          alt="image sauvetage"
-          height="140"
-          width="290"
-        />
-        <Box sx={{ paddingLeft: "1em", width:"100%" }}>
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                <Typography gutterBottom variant="h5" component="div">
-                    {name}
-                </Typography>
-                <Chip label={type} size="small" variant="outlined" />
-            </Box>
-            <Typography variant="body2" color="text.secondary">
-            {shortDescription}
+
+        {
+          image.length > 0 ? <img
+            src={image}
+            alt="image sauvetage"
+            height="140"
+            width="290"
+          /> 
+          :
+           <></>
+        }
+
+        <Box sx={{ paddingLeft: "1em", width: "100%" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Typography gutterBottom variant="h5" component="div">
+              {name}
             </Typography>
+            <Chip label={type} size="small" variant="outlined" />
+          </Box>
+          <Typography variant="body2" color="text.secondary">
+            {shortDescription}
+          </Typography>
         </Box>
       </Box>
     </Box>
