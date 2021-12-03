@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import styled from '@mui/styled-engine';
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import SearchResult from "./SearchResult"
+import DatePicker from '@mui/lab/DatePicker';
+import { LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const MainContainer = styled('div')(() => ({
     display: "grid",
@@ -29,11 +32,43 @@ const Result = (image: string, name: string, desc: string, type: string) => {
 export default function FullWidthTextField() {
     return (  
         <MainContainer>
-            <Box sx={{ display: "flex", alignItems: "stretch", justifyContent: "center", margin: "1em"}}>
-                {Filter("Sauvetage")}
-                {Filter("Bateau")}
-                {Filter("Sauveteur")}
-                {Filter("Naufragé")}
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center"}}>
+                <Box sx={{ display: "flex", marginRight: "8em"}}>
+                    {Filter("Sauvetage")}
+                    {Filter("Bateau")}
+                    {Filter("Sauveteur")}
+                    {Filter("Naufragé")}
+                </Box>
+                <Box sx={{ display: "flex"}}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <Box sx={{ marginRight: "1em" }}>
+                            <DatePicker
+                                disableFuture
+                                label="date début événement"
+                                openTo="year"
+                                views={['year', 'month', 'day']}
+                                value={null}
+                                onChange={(newValue) => {
+                                    // setValue(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </Box>
+                        <Box>
+                            <DatePicker
+                                disableFuture
+                                label="date fin événement"
+                                openTo="year"
+                                views={['year', 'month', 'day']}
+                                value={null}
+                                onChange={(newValue) => {
+                                    // setValue(newValue);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </Box>
+                    </LocalizationProvider>
+                </Box>
             </Box>
             <Box sx={{ 
                 display: "flex", 
