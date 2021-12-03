@@ -1,5 +1,5 @@
 import { Button, IconButton, Popover, TextField, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, width } from '@mui/system';
 import React, { useState } from 'react';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -38,9 +38,10 @@ export function GenericEditor() {
     };
 
     return (<Box
+    
         component="form"
         sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
+            '& .MuiTextField-root': { m: 1, width: 'auto' }, maxWidth: "60em", marginRight: "auto", marginLeft: "auto"
         }}
         noValidate
         autoComplete="off">
@@ -65,8 +66,7 @@ export function GenericEditor() {
                 />
             </LocalizationProvider>
         </div>
-        <Box sx={{ display: "flex", }}>
-
+        <Box sx={{  display: "flex"}}>
             <div>
                 <h2>Bâteaux</h2>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
