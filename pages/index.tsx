@@ -1,24 +1,12 @@
+import { CircularProgress } from '@mui/material';
+import { Box } from '@mui/system';
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import Nav from '../components/Nav';
-import styles from '../styles/Home.module.css';
-import React from 'react';
-import Footer from '../components/Footer';
-import { Box, typography } from '@mui/system';
-import { CircularProgress, Typography } from '@mui/material';
-import useSWR from 'swr';
+import { Ref, SetStateAction, useEffect, useState } from 'react';
+import useSWRInfinite from "swr/infinite";
 
+const fetcher = (url: string) => fetch(url).then(res => res.json());
+const PAGE_SIZE = 6;
 
-import SWRInfiniteResponse from 'swr/infinite';
-
-type Props<T> = {
-  swr: SWRInfiniteResponse;
-  children: React.ReactChild | ((item: T) => React.ReactNode);
-  loadingIndicator?: React.ReactNode;
-  endingIndicator?: React.ReactNode;
-  isReachingEnd: boolean | ((swr: SWRInfiniteResponse<T>) => boolean);
-  offset?: number;
-};
 
 const useIntersection = <T extends HTMLElement>(): [boolean, Ref<T>] => {
   const [intersecting, setIntersecting] = useState<boolean>(false);
@@ -34,70 +22,78 @@ const useIntersection = <T extends HTMLElement>(): [boolean, Ref<T>] => {
   return [intersecting, (el) => el && setElement(el)];
 };
 
-const InfiniteScroll = <T,>(props: Props<T>): React.ReactElement<Props<T>> => {
-  const {
-    swr,
-    swr: { setSize, data, isValidating },
-    children,
-    loadingIndicator,
-    endingIndicator,
-    isReachingEnd,
-    offset = 0,
-  } = props;
-
-  const [intersecting, ref] = useIntersection<HTMLDivElement>();
-
-  const ending = typeof isReachingEnd === 'function' ? isReachingEnd(swr) : isReachingEnd;
-
-  useEffect(() => {
-    if (intersecting && !isValidating && !ending) {
-      setSize((size) => size + 1);
-    }
-  }, [intersecting, isValidating, setSize, ending]);
-
-  return (
-    <>
-      {typeof children === 'function' ? data?.map((item) => children(item)) : children}
-      <div style={{ position: 'relative' }}>
-        <div ref={ref} style={{ position: 'absolute', top: offset }}></div>
-        {ending ? endingIndicator : loadingIndicator}
-      </div>
-    </>
-  );
-};
-
-
-
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
-
-
 
 
 const Home: NextPage = () => {
+  const repo = "reactjs/react-a11y";
 
-  const { data, error } = useSWR(
-    "https://api.github.com/repos/vercel/swr",
+  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
+    index =>
+      `https://api.github.com/repos/${repo}/issues?per_page=${PAGE_SIZE}&page=${index +
+      1}`,
     fetcher
   );
 
 
 
-  if (error) {
-    return (<Typography>Error loading data</Typography>);
-  }
-  if (!data) {
-    return <CircularProgress />;
-  }
+
+  // const scrollHandler = () => {
+  //   const bottom = document.getElementById("bottom");
+  //   if (bottom && isInViewport(bottom)) {
+  //     console.log("loading", size);
+  //     setSize(size + 1);
+
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", scrollHandler);
+  //   return () => window.removeEventListener("scroll", scrollHandler);
+  // }, []);
+
+
+  const issues = data ? [].concat(...data) : [];
+  const isLoadingInitialData = !data && !error;
+  const isLoadingMore =
+    isLoadingInitialData ||
+    (size > 0 && data && typeof data[size - 1] === "undefined");
+  const isEmpty = data?.[0]?.length === 0;
+  const isReachingEnd =
+    isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
+
+
+  const [intersecting, ref] = useIntersection<HTMLDivElement>();
+
+  useEffect(() => {
+    if (intersecting && !isValidating && !isReachingEnd) {
+      setSize((size) => size + 1);
+    }
+  }, [intersecting, isValidating, setSize, isReachingEnd]);
 
 
   return (
-    <Box>
-      <Typography variant="h6" component="h2" >Nouveautés</Typography>
+    <div style={{ fontFamily: "sans-serif" }}>
 
 
 
-    </Box>
+      <p style={{ position: "sticky" }}>
+        showing {size} page(s) of {isLoadingMore ? "..." : issues.length}{" "}
+        issue(s){" "}
+      </p>
+      {isEmpty ? <p>Yay, no issues found.</p> : null}
+      {issues.map((issue: { id: string, title: string; }) => {
+        return (
+          <Box key={issue.id} sx={{ height: "50vh" }}>
+            - {issue.title}
+          </Box>
+        );
+      })}
+      <div ref={ref}>
 
+        <CircularProgress />
+        {size}
+      </div>
+    </div>
   );
 };
 
