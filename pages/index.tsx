@@ -11,7 +11,16 @@ const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 
 const Home: NextPage = () => {
-  const { data, error } = useSWR('https://api.ndl.iverly.net/sauvetage', fetcher) as { data: Array<any>, error: Error; };
+  const { data, error } = useSWR('https://api.ndl.iverly.net/sauvetage', fetcher) as {
+    data: Array<{
+      dateSauvetage: string,
+      descriptionSauvetage: string,
+      id: 0,
+      sourcesSauvetage: string,
+      temoignagesSauvetage: string,
+      titre: string;
+    }>, error: Error;
+  };
 
   if (error) {
     return <div>Erreur</div>;
