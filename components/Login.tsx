@@ -8,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { FaGithub } from 'react-icons/fa'
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
+import useUser from '../hooks/useUser';
 
 const MainContainer = styled('div')(() => ({
     display: "grid",
@@ -52,9 +53,19 @@ const secondaryText = (text: string) => {
 
 export default function FullWidthTextField() {
     const router = useRouter();
+    const user = useUser();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const onSubmit = useCallback(async () => {
+        const success = await (user?.localAuthentication(email ,password))
+        if (!success) {
+            alert('Connexion impossible')
+            return;
+        }
+        router.push('/')
+    }, [email, password])
 
     const canSubmit = useCallback(() => email && password, [email, password]);
 
@@ -66,7 +77,7 @@ export default function FullWidthTextField() {
             <Form>
                 {FormElem("Identifiant", email, setEmail)}
                 {FormElem("Mot de passe", password, setPassword, 'password')}
-                <Button variant="contained" disabled={!canSubmit()} sx={{ width: "50%", marginTop: "3em", marginBottom: "1em" }}>S'indentifier</Button>
+                <Button variant="contained" disabled={!canSubmit()} onClick={onSubmit} sx={{ width: "50%", marginTop: "3em", marginBottom: "1em" }}>S'indentifier</Button>
         </Form>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0.5em"}}>
                 <Button startIcon={<FcGoogle size={25} />}>S'identifier avec Google</Button>

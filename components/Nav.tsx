@@ -104,8 +104,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={() => user.logout() && handleMenuClose()}>Déconnexion</MenuItem>
         </Menu>
     );
 
@@ -232,7 +231,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {/* {renderMobileMenu} */}
             {renderMenu}
         </Box>
     );

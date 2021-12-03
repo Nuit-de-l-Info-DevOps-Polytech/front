@@ -1,5 +1,6 @@
 import { createContext, useCallback, useState } from 'react';
 import axios from 'axios';
+import { AUTH_ENDPOINT } from '../utils/contants';
 
 export interface UserData {
   email: string;
@@ -17,6 +18,8 @@ export interface UserContextProps {
   isAuthenticated: boolean;
   authorization: UserAuthorization;
   data: UserData;
+  localAuthentication: (email: string, password: string) => boolean;
+  logout: () => boolean;
 }
 
 export const UserContext = createContext<UserContextProps | null>(null);
@@ -29,7 +32,7 @@ const provideContext = () => {
   const localAuthentication = useCallback(async (email, password) => {
     let result;
     try {
-      result = await axios.post('/api/auth/login', { email, password });
+      result = await axios.post(AUTH_ENDPOINT + '/auth/login', { mail: email, password });
     } catch (err) {
       setIsAuthenticated(false);
       setData(null);
@@ -49,7 +52,7 @@ const provideContext = () => {
     if (!isAuthenticated) return true;
 
     try {
-      await axios.post('/api/auth/logout', null, { headers: { Authorization: authorization?.sessionToken as any}});
+      await axios.post(AUTH_ENDPOINT + '/auth/logout', null, { headers: { Authorization: authorization?.sessionToken as any}});
     } catch (err) {} // ignore
 
     setIsAuthenticated(false);
@@ -60,6 +63,8 @@ const provideContext = () => {
   return {
     isAuthenticated,
     data,
+    localAuthentication,
+    logout,
   }
 }
 
