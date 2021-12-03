@@ -12,19 +12,19 @@ import { styled } from '@mui/material/styles';
 
 
 const MainContainer = styled('div')(() => ({
-    display: "grid", 
-    maxWidth: "80em", 
-    marginRight: "auto", 
+    display: "grid",
+    maxWidth: "80em",
+    marginRight: "auto",
     marginLeft: "auto",
     gridTemplateRows: "5fr 1fr",
-    borderTop: "solid 1px rgba(189, 195, 199, 0.5)", 
+    borderTop: "solid 1px rgba(189, 195, 199, 0.5)",
 }));
 
 const ElemFooter = styled('div')(() => ({
-    display: "flex", 
-    flexFlow: "column", 
+    display: "flex",
+    flexFlow: "column",
     alignItems: "center",
-    justifyContent: "center", 
+    justifyContent: "center",
 }));
 
 const secondaryText = (name: string) => {
@@ -32,46 +32,48 @@ const secondaryText = (name: string) => {
         <Typography color="text.secondary">
             {name}
         </Typography>
-    )
+    );
 };
 
 export default function footer() {
-  return (
-    <MainContainer>
-        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
-            <ElemFooter>
-                <Typography
-                    variant="h6"
-                    component="div"
-                >
-                    Nom de l'equipe
+    return (
+        <MainContainer>
+            <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }}>
+                <ElemFooter>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                    >
+                        Nom de l'equipe
+                    </Typography>
+                    {secondaryText("Fix Typo de Polytech Montpellier DO")}
+                </ElemFooter>
+                <ElemFooter>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                    >
+                        Liens utiles
+                    </Typography>
+                    {<Typography color="text.secondary">
+                        Projet NFT : <a href="https://nft.maxime-pizzolitto.me">https://nft.maxime-pizzolitto.me</a>
+                    </Typography>}
+                </ElemFooter>
+                <ElemFooter>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                    >
+                        Contact
+                    </Typography>
+                    {secondaryText("simon.lucido@etu.umontpellier.fr")}
+                </ElemFooter>
+            </Box>
+            <Box sx={{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
+                <Typography>
+                    ©2021 Copyright
                 </Typography>
-                {secondaryText("Fix Typo de Polytech Montpellier DO")}
-            </ElemFooter>
-            <ElemFooter>
-                <Typography
-                    variant="h6"
-                    component="div"
-                >
-                    Liens utiles
-                </Typography>
-                {secondaryText("Projet NFT : https://nft.maxime-pizzolitto.me")}
-            </ElemFooter>
-            <ElemFooter>
-                <Typography
-                    variant="h6"
-                    component="div"
-                >
-                    Contact
-                </Typography>
-                {secondaryText("simon.lucido@etu.umontpellier.fr")}
-            </ElemFooter>
-        </Box>
-        <Box sx= {{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
-            <Typography>
-                ©2021 Copyright
-            </Typography>
-        </Box>
-    </MainContainer>
-  );
+            </Box>
+        </MainContainer>
+    );
 }
