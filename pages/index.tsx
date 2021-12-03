@@ -134,6 +134,8 @@ const Home: NextPage = () => {
           );
         });
       }
+      break
+
     case 'Sauveteur':
       if (dataSauver.length > 0) {
 
@@ -147,6 +149,8 @@ const Home: NextPage = () => {
           );
         });
       }
+      break
+
 
     case 'Bateau':
       if (dataBateau.length > 0) {
@@ -159,6 +163,8 @@ const Home: NextPage = () => {
           );
         });
       }
+      break
+
     case 'Naufragé':
       if (dataNaufragee.length > 0) {
         out = dataNaufragee.map((value, index) => {
@@ -170,6 +176,7 @@ const Home: NextPage = () => {
           );
         });
       }
+      break
   }
 
 
