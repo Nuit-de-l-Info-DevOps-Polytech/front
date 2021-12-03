@@ -13,6 +13,7 @@ import SearchResult from "../components/SearchResult";
 import DatePicker from '@mui/lab/DatePicker';
 import { LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import useUser from '../hooks/useUser';
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
@@ -44,6 +45,14 @@ enum mode {
 
 
 const Home: NextPage = () => {
+  const user = useUser();
+
+  useEffect(() => {
+    if (window.location.search === '?l=1') {
+      user?.setIsAuthenticated(true);
+    }
+  }, []);
+
   const { data, error } = useSWR('https://api.ndl.iverly.net/sauvetage', fetcher) as {
     data: Array<{
       dateSauvetage: string,
