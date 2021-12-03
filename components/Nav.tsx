@@ -191,13 +191,15 @@ export default function Nav({ connected }: { connected: Boolean; }) {
                         >
                             Créer
                         </Button>
-                        <Button
 
-                            color="inherit"
-                        >
-                            Connexion
-                        </Button>
 
+                        <Link href="/login" passHref>
+                            <Button
+                                color="inherit">
+                                    
+                                Connexion
+                            </Button>
+                        </Link>
                         <IconButton
                             size="large"
                             edge="end"
