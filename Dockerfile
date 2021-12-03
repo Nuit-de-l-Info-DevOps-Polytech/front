@@ -11,4 +11,4 @@ RUN npm install --production
 
 COPY . .
 
-RUN start
+CMD [ "node", "index.js" ]
