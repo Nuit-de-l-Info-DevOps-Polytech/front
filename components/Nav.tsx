@@ -182,7 +182,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
 
                     </Typography>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "flex-end" }}>
-                        {user?.isAuthenticated &&
+                        {/* {user?.isAuthenticated && */}
                             <Button sx={{ mr: "1em" }}
                                 variant="text"
                                 color="inherit"
@@ -190,7 +190,7 @@ export default function Nav({ connected }: { connected: Boolean; }) {
                             >
                                 Créer
                             </Button>
-                        }
+                        {/* } */}
 
 
                         {!user?.isAuthenticated &&
