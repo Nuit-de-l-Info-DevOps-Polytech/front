@@ -55,8 +55,7 @@ export default function footer() {
                 >
                     Liens utiles
                 </Typography>
-                {secondaryText("Nils Ponsard")}
-                {secondaryText("Maxime Foucher")}
+                {secondaryText("Projet NFT : https://nft.maxime-pizzolitto.me")}
             </ElemFooter>
             <ElemFooter>
                 <Typography
@@ -65,9 +64,7 @@ export default function footer() {
                 >
                     Contact
                 </Typography>
-                {secondaryText("nils.ponsard")}
-                {secondaryText("Maxime Foucher")}
-                {secondaryText("Mathieux Soysal")}
+                {secondaryText("simon.lucido@etu.umontpellier.fr")}
             </ElemFooter>
         </Box>
         <Box sx= {{ display: "flex", flexFlow: "row", justifyContent: "center", alignItems: "center" }}>
