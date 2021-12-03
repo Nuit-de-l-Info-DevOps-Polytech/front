@@ -119,6 +119,61 @@ const Home: NextPage = () => {
   }
 
 
+  let out: Array<JSX.Element> = [];
+
+  switch (filter) {
+    case 'Sauvetage':
+
+      if (dataSauvetage.length > 0) {
+        out = dataSauvetage.map((value, index) => {
+          return (
+
+            <Box sx={{ marginTop: "3em" }} key={index}>
+              <SearchResult image={""} name={value.titre} shortDescription={value.descriptionSauvetage} type={filter} />
+            </Box>
+          );
+        });
+      }
+    case 'Sauveteur':
+      if (dataSauver.length > 0) {
+
+
+        out = dataSauver.map((value, index) => {
+          return (
+
+            <Box sx={{ marginTop: "3em" }} key={index}>
+              <SearchResult image={""} name={value.personne.nom} shortDescription={value.personne.description} type={filter} />
+            </Box>
+          );
+        });
+      }
+
+    case 'Bateau':
+      if (dataBateau.length > 0) {
+        out = dataBateau.map((value, index) => {
+          return (
+
+            <Box sx={{ marginTop: "3em" }} key={index}>
+              <SearchResult image={""} name={value.nom} shortDescription={value.type} type={filter} />
+            </Box>
+          );
+        });
+      }
+    case 'Naufragé':
+      if (dataNaufragee.length > 0) {
+        out = dataNaufragee.map((value, index) => {
+          return (
+
+            <Box sx={{ marginTop: "3em" }} key={index}>
+              <SearchResult image={""} name={value.nom} shortDescription={value.profession} type={filter} />
+            </Box>
+          );
+        });
+      }
+  }
+
+
+
   return (
     <div style={{ fontFamily: "sans-serif" }}>
       <MainContainer>
@@ -167,47 +222,8 @@ const Home: NextPage = () => {
           alignSelf: "center",
           justifySelf: "center"
         }}>
-          {() => {
-            switch (filter) {
-              case 'Sauvetage':
-                return dataSauvetage.map((value, index) => {
-                  return (
-
-                    <Box sx={{ marginTop: "3em" }} key={index}>
-                      <SearchResult image={""} name={value.titre} shortDescription={value.descriptionSauvetage} type={filter} />
-                    </Box>
-                  );
-                });
-              case 'Sauveteur':
-                return dataSauver.map((value, index) => {
-                  return (
-
-                    <Box sx={{ marginTop: "3em" }} key={index}>
-                      <SearchResult image={""} name={value.personne.nom} shortDescription={value.personne.description} type={filter} />
-                    </Box>
-                  );
-                });
-              case 'Bateau':
-                return dataBateau.map((value, index) => {
-                  return (
-
-                    <Box sx={{ marginTop: "3em" }} key={index}>
-                      <SearchResult image={""} name={value.nom} shortDescription={value.type} type={filter} />
-                    </Box>
-                  );
-                });
-              case 'Naufragé':
-                return dataNaufragee.map((value, index) => {
-                  return (
-
-                    <Box sx={{ marginTop: "3em" }} key={index}>
-                      <SearchResult image={""} name={value.nom} shortDescription={value.profession} type={filter} />
-                    </Box>
-                  );
-                });
-            }
-
-          }
+          {
+            out
           }
         </Box>
       </MainContainer>
