@@ -26,13 +26,11 @@ const Form = styled('div')(() => ({
 const FormElem = (label: string) => {
     return (
         <TextField
-            id="outlined-name"
+            id="filled-search"
             label={label}
-            sx={{
-                width: "50%",
-                maxWidth: "100%",
-                marginTop: "1em",
-            }}
+            type="search"
+            variant="filled"
+            sx= {{ margin: "0.5em" }}
         />
     )
 };
@@ -49,23 +47,15 @@ export default function FullWidthTextField() {
   return (
     <MainContainer>
         <Typography variant="h6" sx={{ justifySelf: "center", marginTop: "3em", marginBottom: "1em" }}>
-            S'identifier
+            Créer un nouveau compte
         </Typography>
         <Form>
-            {FormElem("Identifiant")}
+            {FormElem("Nom")}
+            {FormElem("Prenom")}
+            {FormElem("Email")}
             {FormElem("Mot de passe")}
-            <Button variant="contained" sx={{ width: "50%", marginTop: "3em", marginBottom: "1em" }}>S'indentifier</Button>
+            <Button variant="contained" sx={{ width: "50%", marginTop: "3em", marginBottom: "2.5em" }}>S'inscrire</Button>
        </Form>
-       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", margin: "0.5em"}}>
-            <Button startIcon={<FcGoogle size={25} />}>S'identifier avec Google</Button>
-       </Box>
-       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.2em"}}>
-            <Button startIcon={<FaGithub size={25} />}>S'identifier avec GitHub</Button>
-       </Box>
-       <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.5em"}}>
-            {secondaryText("Première visite ? ")}
-            <Button color="secondary" variant="text">Inscrivez-vous</Button>
-       </Box>
     </MainContainer>
   );
 }
