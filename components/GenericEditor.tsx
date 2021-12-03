@@ -19,10 +19,10 @@ export function GenericEditor() {
     let [boats, setBoats] = useState([{ id: 1, nom: "Ponsard", prenom: "Nils" }, { id: 2, nom: "Baron", prenom: "Esteban" }] as Array<{ id: number, nom: string, prenom: string; }>);
     let [boatDialog, setBoatsDialog] = useState(false);
 
-    let [wrecked, setWrecked] = useState([{ id: 1, nom: "Ponsard", prenom: "Nils" }, { id: 2, nom: "Baron", prenom: "Esteban" }] as Array<{ id: number, nom: string, prenom: string; }>);
-    let [boatDialog, setBoatsDialog] = useState(false);
-    let [boats, setBoats] = useState([{ id: 1, nom: "Ponsard", prenom: "Nils" }, { id: 2, nom: "Baron", prenom: "Esteban" }] as Array<{ id: number, nom: string, prenom: string; }>);
-    let [boatDialog, setBoatsDialog] = useState(false);
+    let [wreckeds, setWreckeds] = useState([{ id: 1, nom: "Ponsard", prenom: "Nils" }, { id: 2, nom: "Baron", prenom: "Esteban" }] as Array<{ id: number, nom: string, prenom: string; }>);
+    let [wreckedDialog, setWreckedDialog] = useState(false);
+    let [rescuers, setRescuers] = useState([{ id: 1, nom: "Ponsard", prenom: "Nils" }, { id: 2, nom: "Baron", prenom: "Esteban" }] as Array<{ id: number, nom: string, prenom: string; }>);
+    let [rescuersDialog, setRescuersDialog] = useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -66,7 +66,9 @@ export function GenericEditor() {
             </LocalizationProvider>
         </div>
         <Box sx={{ display: "flex", }}>
+
             <div>
+                <h2>Bâteaux</h2>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {boats.map((value, index) => {
                         const labelId = `checkbox-list-label-${value}`;
@@ -103,15 +105,16 @@ export function GenericEditor() {
             </div>
 
             <div>
+                <h2>Naufragés</h2>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {boats.map((value, index) => {
+                    {wreckeds.map((value, index) => {
                         const labelId = `checkbox-list-label-${value}`;
 
                         return (
                             <ListItem key={index} secondaryAction={
                                 <IconButton
                                     onClick={() => {
-                                        setBoats(boats.slice(0, index).concat(boats.slice(index + 1)));
+                                        setWreckeds(wreckeds.slice(0, index).concat(wreckeds.slice(index + 1)));
                                     }}
                                     color="error" edge="end" >
                                     <DeleteOutlineOutlinedIcon />
@@ -138,15 +141,16 @@ export function GenericEditor() {
                 </Popover>
             </div>
             <div>
+                <h2> Sauveteurs </h2>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {boats.map((value, index) => {
+                    {rescuers.map((value, index) => {
                         const labelId = `checkbox-list-label-${value}`;
 
                         return (
                             <ListItem key={index} secondaryAction={
                                 <IconButton
                                     onClick={() => {
-                                        setBoats(boats.slice(0, index).concat(boats.slice(index + 1)));
+                                        setRescuers(rescuers.slice(0, index).concat(rescuers.slice(index + 1)));
                                     }}
                                     color="error" edge="end" >
                                     <DeleteOutlineOutlinedIcon />
