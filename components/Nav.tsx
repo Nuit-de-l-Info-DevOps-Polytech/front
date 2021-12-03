@@ -165,28 +165,24 @@ export default function Nav({ connected }: { connected: Boolean; }) {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: "grid", gridTemplateColumns: "1fr 2fr 1fr" }} >
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "flex-start" }}>
+                        <Link href="/" passHref>
+                            <Button
+                                color="inherit">
+                                    Accueil
+                            </Button>
+                        </Link>
+                    </Box>
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        sx={{ display: { xs: 'none', sm: 'block' }, textAlign: 'center'}}
+                    >
+                        Corsaires Dunkerquois
 
-                    <Link href="/" passHref>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            sx={{ display: { xs: 'none', sm: 'block' } }}
-                        >
-                            Accueil
-
-                        </Typography>
-                    </Link>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "right" }}>
+                    </Typography>
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, flexFlow: "row", justifyContent: "flex-end" }}>
                         {user?.isAuthenticated &&
                             <Button sx={{ mr: "1em" }}
                                 variant="text"
