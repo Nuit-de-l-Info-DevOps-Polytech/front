@@ -1,7 +1,7 @@
 import { CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import type { NextPage } from 'next';
-import { Ref, SetStateAction, useEffect, useState } from 'react';
+import { Ref, useEffect, useState } from 'react';
 import useSWRInfinite from "swr/infinite";
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
@@ -33,23 +33,6 @@ const Home: NextPage = () => {
       1}`,
     fetcher
   );
-
-
-
-
-  // const scrollHandler = () => {
-  //   const bottom = document.getElementById("bottom");
-  //   if (bottom && isInViewport(bottom)) {
-  //     console.log("loading", size);
-  //     setSize(size + 1);
-
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", scrollHandler);
-  //   return () => window.removeEventListener("scroll", scrollHandler);
-  // }, []);
 
 
   const issues = data ? [].concat(...data) : [];
