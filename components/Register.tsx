@@ -3,6 +3,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import styled from '@mui/styled-engine';
 import { Button } from '@mui/material';
+import { useCallback, useState } from 'react';
+import axios from 'axios';
+import { AUTH_ENDPOINT } from '../utils/contants';
+import { useRouter } from 'next/router';
 
 const MainContainer = styled('div')(() => ({
     display: "grid",
@@ -20,13 +24,15 @@ const Form = styled('div')(() => ({
     justifyContent: "center",
 }));
 
-const FormElem = (label: string) => {
+const FormElem = (label: string, getter?: any, setter?: any) => {
     return (
         <TextField
             id="filled-search"
             label={label}
+            value={getter}
             type="search"
             variant="filled"
+            onChange={e => setter && setter(e.target.value)}
             sx= {{ margin: "0.5em" }}
         />
     )
@@ -41,18 +47,43 @@ const secondaryText = (text: string) => {
 };
 
 export default function FullWidthTextField() {
-  return (
-    <MainContainer>
-        <Typography variant="h6" sx={{ justifySelf: "center", marginTop: "3em", marginBottom: "1em" }}>
-            Créer un nouveau compte
-        </Typography>
-        <Form>
-            {FormElem("Nom")}
-            {FormElem("Prenom")}
-            {FormElem("Email")}
-            {FormElem("Mot de passe")}
-            <Button variant="contained" sx={{ width: "50%", marginTop: "3em", marginBottom: "2.5em" }}>S'inscrire</Button>
-       </Form>
-    </MainContainer>
-  );
+    const router = useRouter();
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onSubmit = useCallback(async () => {
+        try {
+            await axios.post(AUTH_ENDPOINT + '/auth/register', {
+                mail: email,
+                prenom: firstName,
+                nom: lastName,
+                password: password
+            })
+        } catch (err) {
+            alert('Impossible de créer votre compte :(')
+            return;
+        }
+
+        router.push('/login');
+    }, [firstName, lastName, email, password]);
+
+    const canSubmit = useCallback(() => firstName && lastName && email && password, [firstName, lastName, email, password]);
+
+    return (
+        <MainContainer>
+            <Typography variant="h6" sx={{ justifySelf: "center", marginTop: "3em", marginBottom: "1em" }}>
+                Créer un nouveau compte
+            </Typography>
+            <Form>
+                {FormElem("Prénom", firstName, setFirstName)}
+                {FormElem("Nom", lastName, setLastName)}
+                {FormElem("Email", email, setEmail)}
+                {FormElem("Mot de passe", password, setPassword)}
+                <Button variant="contained" disabled={!canSubmit()} onClick={onSubmit} sx={{ width: "50%", marginTop: "3em", marginBottom: "2.5em" }}>S'inscrire</Button>
+        </Form>
+        </MainContainer>
+    );
 }
